@@ -2,8 +2,8 @@ from tkinter import *
 
 app = Tk() 
 
-ml = Label(app, text="Hello world!")
+myl = Label(app, text="Hello world!")
 
-ml.pack()
+myl.pack()
 
 app.mainloop()
