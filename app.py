@@ -14,9 +14,9 @@ font_footer = pygame.font.Font("graphics/Minecraft.ttf", 17)
 background_image = pygame.image.load("graphics/cat.png").convert_alpha()
 
 # main menu text and variables
-title = font_title.render("SAVE THE CAT", False, pygame.Color("hotpink2"))
+title = font_title.render("SAVE THE CAT", False, pygame.Color("deeppink"))
 title_position = 0
-footer = font_footer.render("CS50x 2024 final project by Margarita Kolessova", False, pygame.Color("hotpink2"))
+footer = font_footer.render("CS50x 2024 final project by Margarita Kolessova", False, pygame.Color("deeppink"))
 
 # main loop
 while True:
@@ -30,7 +30,7 @@ while True:
             exit()
 
     # background with cat
-    screen.fill(pygame.Color("lavenderblush"))
+    screen.fill("Black")
     screen.blit(background_image, (600,400))
 
     # menu
