@@ -7,7 +7,7 @@ class TextRectException:
     def __str__(self):
         return self.message
 
-def render_textrect(string, font, rect, text_color, background_color, justification=0):
+def render_textrect(string, font, rect, text_color, background_color, justification=0, line_spacing=0):
     final_lines = []
 
     requested_lines = string.splitlines()
@@ -46,7 +46,7 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
         if accumulated_height + font.size(line)[1] >= rect.height:
             raise TextRectException("Text too tall for the rectangle.")
         if line != "":
-            tempsurface = font.render(line, 1, text_color)
+            tempsurface = font.render(line, 0, text_color)
             if justification == 0:
                 surface.blit(tempsurface, (0, accumulated_height))
             elif justification == 1:
@@ -55,6 +55,6 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
                 surface.blit(tempsurface, (rect.width - tempsurface.get_width(), accumulated_height))
             else:
                 raise TextRectException("Invalid justification argument.")
-        accumulated_height += font.size(line)[1]
+        accumulated_height += font.size(line)[1] + line_spacing
 
     return surface

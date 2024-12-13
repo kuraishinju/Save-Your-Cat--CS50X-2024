@@ -9,7 +9,7 @@ class Menu:
         self.selected_class = selected_class
 
         # titolo
-        self.title = font_title.render("SAVE THE CAT", False, pink)
+        self.title = font_title.render("SAVE YOUR CAT!", False, pink)
         self.title_rect = self.title.get_rect()
         self.title_rect.center = (350, 0)
 
@@ -19,36 +19,36 @@ class Menu:
         self.footer_rect.center = (350, 470)
 
         # testo welcome
-        self.text1_i = "You are a brave citizen of a far far away kingdom who lives alone with their cat. But one day a tragedy happens: your cat has been kidnapped by the enemy kindgom! Their ruler always preferred dogs, so you fear for your dear one's safety.\nQuick, you need to rescue them!\nWho are you?"
-        self.rect1 = pygame.Rect(0, 0, 500, 140)
-        self.rect1.center = (350, 200)
-        self.text1 = render_textrect(self.text1_i, font_text, self.rect1, pink, "White", justification=1)
+        self.text1_i = "You are a brave citizen of a far far away kingdom who lives alone with their cat. But one day a tragedy happens: your cat has been kidnapped by the enemy kindgom! Their ruler always preferred dogs, so you fear for your dear one's safety.\nQuick, you need to rescue them!\nWho are you? Click to select a class"
+        self.rect1 = pygame.Rect(0, 0, 500, 200)
+        self.rect1.center = (350, 210)
+        self.text1 = render_textrect(self.text1_i, font_text, self.rect1, pink, "Black", justification=1, line_spacing=4)
 
         # knight
         self.knight = font_text.render("KNIGHT", False, pink, "Black")
         self.knight_rect = self.knight.get_rect()
-        self.knight_rect.center = (175, 285)
+        self.knight_rect.center = (175, 295)
 
         # adventurer
         self.adv = font_text.render("ADVENTURER", False, pink, "Black")
         self.adv_rect = self.adv.get_rect()
-        self.adv_rect.center = (350, 285)
+        self.adv_rect.center = (350, 295)
 
         # wizard
         self.wiz = font_text.render("WIZARD", False, pink, "Black")
         self.wiz_rect = self.wiz.get_rect()
-        self.wiz_rect.center = (525, 285)
+        self.wiz_rect.center = (525, 295)
 
         # scelta classe
-        self.cat_choice = font_text.render("What's your cat's name?", False, pink, "White")
+        self.cat_choice = font_text.render("What's your cat's name? It can't be longer than 10 letters.", False, pink, "Black")
         self.cat_rect = self.cat_choice.get_rect()
-        self.cat_rect.center = (350, 320)
+        self.cat_rect.center = (350, 335)
 
         # play button
         self.play_text = "+--------+\n|  PLAY  |\n+--------+"
         self.play_rect = pygame.Rect(0, 0, 90, 60)
         self.play_rect.center = (350, 420)
-        self.play_button = render_textrect(self.play_text, font_text, self.play_rect, pink, "White", justification=1)
+        self.play_button = render_textrect(self.play_text, font_text, self.play_rect, pink, "Black", justification=1)
 
     # event
     def class_selection(self, event):
@@ -74,7 +74,7 @@ class Menu:
         self.wiz = font_text.render("WIZARD", False, "Black" if self.selected_class == "wiz" else pink, pink if self.selected_class == "wiz" else "Black")
         # resto
         screen.blit(self.title, self.title_rect)
-        if self.title_rect.centery < 100:
+        if self.title_rect.centery < 70:
             self.title_rect.centery += 4
         screen.blit(self.footer, self.footer_rect)
         screen.blit(self.text1, self.rect1)
