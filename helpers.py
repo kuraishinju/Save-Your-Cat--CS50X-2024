@@ -1,6 +1,6 @@
 import pygame
 
-# funzione testo
+# * funzione testo lungo
 class TextRectException:
     def __init__(self, message = None):
         self.message = message
@@ -58,3 +58,26 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
         accumulated_height += font.size(line)[1] + line_spacing
 
     return surface
+
+# * helpers vari
+def simple_text(font, text, color, center_p):
+    content = font.render(text, False, color)
+    rect = content.get_rect()
+    rect.center = center_p
+    return content, rect
+
+def paragraph(text, width, height, center_p, font, tcolor, bcolor, just, space): 
+    long = text
+    rect = pygame.Rect(0, 0, width, height)
+    rect.center = center_p
+    content = render_textrect(long, font, rect, tcolor, bcolor, justification=just, line_spacing=space)
+    return content, rect
+
+def selected_hover(font, text, name, black, pink, blue, cl, ms):
+    content = font.render(
+        text,
+        False,
+        black if cl == name or ms == name else pink,
+        pink if ms == name else blue if cl == name else black
+    )
+    return content

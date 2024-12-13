@@ -1,56 +1,58 @@
 import pygame
-from pygame.locals import MOUSEBUTTONDOWN
-from helpers import render_textrect, TextRectException
+from pygame.locals import MOUSEBUTTONDOWN, MOUSEMOTION
+from helpers import render_textrect, TextRectException, simple_text, paragraph, selected_hover
 
 # * MAIN MENU text, variables and function
 class Menu:
-    def __init__(self, font_title, font_footer, font_text, pink, selected_class):
-        # definiamo selezione
+    def __init__(self, font_title, font_footer, font_text, pink, blue, selected_class):
+        # definiamo variabili uniche
         self.selected_class = selected_class
+        self.mouse = None
 
         # titolo
-        self.title = font_title.render("SAVE YOUR CAT!", False, pink)
-        self.title_rect = self.title.get_rect()
-        self.title_rect.center = (350, 0)
+        self.title, self.title_rect = simple_text(
+            font_title, "SAVE YOUR CAT!", blue, (350, 0)
+        )
 
         # footer
-        self.footer = font_footer.render("CS50x 2024 final project by Margarita Kolessova", False, pink)
-        self.footer_rect = self.footer.get_rect()
-        self.footer_rect.center = (350, 470)
+        self.footer, self.footer_rect = simple_text(
+            font_footer, "CS50x 2024 final project by Margarita Kolessova", pink, (350, 470)
+        )
 
         # testo welcome
-        self.text1_i = "You are a brave citizen of a far far away kingdom who lives alone with their cat. But one day a tragedy happens: your cat has been kidnapped by the enemy kindgom! Their ruler always preferred dogs, so you fear for your dear one's safety.\nQuick, you need to rescue them!\nWho are you? Click to select a class"
-        self.rect1 = pygame.Rect(0, 0, 500, 200)
-        self.rect1.center = (350, 210)
-        self.text1 = render_textrect(self.text1_i, font_text, self.rect1, pink, "Black", justification=1, line_spacing=4)
+        self.text_w, self.text_w_rect = paragraph(
+            "You are a brave citizen of a far far away kingdom who lives alone with their cat. But one day a tragedy happens: your cat has been kidnapped by the enemy kindgom! Their ruler always preferred dogs, so you fear for your dear one's safety.\nQuick, you need to rescue them!\nWho are you? Click to select a class", 500, 250, (350, 230), font_text, pink, "Black", 1, 4
+        )
+
+        # choices x
+        choices_x = 295
 
         # knight
-        self.knight = font_text.render("KNIGHT", False, pink, "Black")
-        self.knight_rect = self.knight.get_rect()
-        self.knight_rect.center = (175, 295)
+        self.knight, self.knight_rect = simple_text(
+            font_text, "KNIGHT", pink, (175, choices_x)
+        )
 
         # adventurer
-        self.adv = font_text.render("ADVENTURER", False, pink, "Black")
-        self.adv_rect = self.adv.get_rect()
-        self.adv_rect.center = (350, 295)
+        self.adv, self.adv_rect = simple_text(
+            font_text, "ADVENTURER", pink, (350, choices_x)
+        )
 
         # wizard
-        self.wiz = font_text.render("WIZARD", False, pink, "Black")
-        self.wiz_rect = self.wiz.get_rect()
-        self.wiz_rect.center = (525, 295)
+        self.wiz, self.wiz_rect = simple_text(
+            font_text, "WIZARD", pink, (525, choices_x)
+        )
 
         # scelta classe
-        self.cat_choice = font_text.render("What's your cat's name? It can't be longer than 10 letters.", False, pink, "Black")
-        self.cat_rect = self.cat_choice.get_rect()
-        self.cat_rect.center = (350, 335)
+        self.cat_choice, self.cat_rect = simple_text(
+            font_text, "What's your cat's name? Maximum 10 letters", pink, (350, 335)
+        )
 
         # play button
-        self.play_text = "+--------+\n|  PLAY  |\n+--------+"
-        self.play_rect = pygame.Rect(0, 0, 90, 60)
-        self.play_rect.center = (350, 420)
-        self.play_button = render_textrect(self.play_text, font_text, self.play_rect, pink, "Black", justification=1)
+        self.play_button, self.play_rect = paragraph(
+            "+--------+\n|  PLAY  |\n+--------+", 90, 61, (350, 430), font_text, pink, "Black", 1, 0
+        )
 
-    # event
+    # events
     def class_selection(self, event):
         # Gestisce la selezione della classe
         if event.type == MOUSEBUTTONDOWN:
@@ -66,18 +68,47 @@ class Menu:
                 self.selected_class = "wiz"
         return self.selected_class
     
+    def hover(self, event):
+        if event.type == MOUSEMOTION:
+            mouse_pos = pygame.mouse.get_pos()
+            if self.knight_rect.collidepoint(mouse_pos):
+                self.mouse = "knight"
+            elif self.adv_rect.collidepoint(mouse_pos):
+                self.mouse = "adv"
+            elif self.wiz_rect.collidepoint(mouse_pos):
+                self.mouse = "wiz"
+            elif self.play_rect.collidepoint(mouse_pos):
+                self.mouse = "play"
+            else:
+                self.mouse = None
 
-    def draw(self, screen, font_text, pink):
+    # draw
+    def draw(self, screen, font_text, pink, blue):
         # colore bottoni
-        self.knight = font_text.render("KNIGHT", False, "Black" if self.selected_class == "knight" else pink, pink if self.selected_class == "knight" else "Black")
-        self.adv = font_text.render("ADVENTURER", False, "Black" if self.selected_class == "adv" else pink, pink if self.selected_class == "adv" else "Black")
-        self.wiz = font_text.render("WIZARD", False, "Black" if self.selected_class == "wiz" else pink, pink if self.selected_class == "wiz" else "Black")
+        self.knight = selected_hover(
+            font_text, "KNIGHT", "knight", "Black", pink, blue, self.selected_class, self.mouse
+            )
+        self.adv = selected_hover(
+            font_text, "ADVENTURER", "adv", "Black", pink, blue, self.selected_class, self.mouse
+        )
+        self.wiz = selected_hover(
+            font_text, "WIZARD", "wiz", "Black", pink, blue, self.selected_class, self.mouse
+        )
+        self.play_button = render_textrect(
+            "+--------+\n|  PLAY  |\n+--------+",
+            font_text,
+            self.play_rect,
+            blue if self.mouse == "play" else pink,
+            "Black",
+            justification=1,
+            line_spacing=0)
+        
         # resto
         screen.blit(self.title, self.title_rect)
         if self.title_rect.centery < 70:
             self.title_rect.centery += 4
         screen.blit(self.footer, self.footer_rect)
-        screen.blit(self.text1, self.rect1)
+        screen.blit(self.text_w, self.text_w_rect)
         screen.blit(self.knight, self.knight_rect)
         screen.blit(self.adv, self.adv_rect)
         screen.blit(self.wiz, self.wiz_rect)
