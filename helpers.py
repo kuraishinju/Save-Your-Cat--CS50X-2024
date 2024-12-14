@@ -59,7 +59,7 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
 
     return surface
 
-# * helpers vari
+# * helpers globali
 def simple_text(font, text, color, center_p):
     content = font.render(text, False, color)
     rect = content.get_rect()
@@ -73,6 +73,7 @@ def paragraph(text, width, height, center_p, font, tcolor, bcolor, just, space):
     content = render_textrect(long, font, rect, tcolor, bcolor, justification=just, line_spacing=space)
     return content, rect
 
+# * helpers menu
 def selected_hover(font, text, name, black, pink, blue, cl, ms):
     content = font.render(
         text,
@@ -81,3 +82,15 @@ def selected_hover(font, text, name, black, pink, blue, cl, ms):
         pink if ms == name else blue if cl == name else black
     )
     return content
+
+# TODO
+def requirements(selected_class, cat_name):
+    # class
+    if selected_class not in ["knight", "adv", "wiz"]:
+        return False
+    # max strlen
+    if len(cat_name) > 10:
+        return False
+    # alphanum
+    if not cat_name.isalpha():
+        return False
