@@ -41,7 +41,7 @@ while True:
             # uscita dal loop e chiusura
             exit()
 
-        # selezione classe
+        # eventi menu
         if game_state == "menu":
             menu.hover(event)
             selected_class = menu.class_selection(event)
