@@ -1,12 +1,15 @@
 import pygame
+import pygame_gui
 from pygame.locals import MOUSEBUTTONDOWN, MOUSEMOTION
 from string import capwords
-from helpers import render_textrect, TextRectException, simple_text, paragraph, selected_hover, requirements
+from helpers import render_textrect, TextRectException, simple_text, paragraph, selected_hover, requirements, choice_hover
 
 # * MAIN MENU
 class Menu:
-    def __init__(self, font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state):
-        
+    def __init__(self, font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager):
+        # input manager
+        self.manager = manager
+
         # definiamo variabili uniche
         self.selected_class = selected_class
         self.cat_name = cat_name
@@ -47,17 +50,22 @@ class Menu:
             font_text, "WIZARD", pink, (525, choices_x)
         )
 
-        # scelta classe
+        # testo nome gatto
         self.cat_choice, self.cat_rect = simple_text(
             font_text, "What's your cat's name? Maximum 10 letters", pink, (350, 335)
         )
 
-        # TODO casella nome gatto
-        
+        # casella nome gatto
+        self.cat_in = pygame_gui.elements.UITextEntryLine(
+            relative_rect = pygame.Rect(280, 350, 150, 30),
+            manager=self.manager,
+            object_id="#cat_name",
+            placeholder_text="Enter name here"
+        )
 
         # casella errore
         self.er, self.er_rect = simple_text(
-            font_text, "Please, select at least one class and enter a valid cat name", pink, (350, 335)
+            font_text, "Please, select at least one class and enter a valid cat name", pink, (350, 390)
         )
 
         # play button
@@ -87,13 +95,14 @@ class Menu:
         if event.type == MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()
             if self.play_rect.collidepoint(mouse_pos):
-                if requirements(self.selected_class, user_in):
-                    # self.cat_name = capwords(user_in)
-                    # self.game_state = "menu"
+                self.cat_name = capwords(self.cat_in.get_text())
+                print(self.cat_name)
+                if requirements(self.selected_class, self.cat_name):
+                    self.game_state = "s1"
                     return self.cat_name, self.game_state
                 else:
                     self.error = 1
-                    return
+        return None, "menu"
 
     def hover(self, event):
         if event.type == MOUSEMOTION:
@@ -110,7 +119,7 @@ class Menu:
                 self.mouse = None
 
     # * draw
-    def draw(self, screen, font_text, pink, blue):
+    def draw(self, screen, fps, font_text, pink, blue):
         # colore bottoni
         self.knight = selected_hover(
             font_text, "KNIGHT", "knight", "Black", pink, blue, self.selected_class, self.mouse
@@ -144,3 +153,32 @@ class Menu:
         screen.blit(self.play_button, self.play_rect)
         if self.error == 1:
             screen.blit(self.er, self.er_rect)
+        
+        self.manager.update(fps)
+        self.manager.draw_ui(screen)
+
+# * Screen 1
+class State1:
+    def __init__(self, font_text, pink, blue, selected_class, cat_name, game_state):
+        # testo
+        self.testo, self.testo_rect = simple_text(font_text, "prova", pink, (100, 350)
+        )
+
+        # scelta 1
+
+        # scelta 2
+
+    #
+    choice_hover(self, event)
+    
+    def path(self, event):
+        choice(event)
+        #if ? == 1:
+            #return
+        #if ? == 2:
+            #return
+        #else return error e print("Error")
+        return
+    
+    def draw(self, screen):
+        screen.blit(self.testo, self.testo_rect)

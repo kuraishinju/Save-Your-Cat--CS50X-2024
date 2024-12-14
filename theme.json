@@ -1,0 +1,15 @@
+{
+    "#cat_name": {
+        "colours": {
+            "dark_bg": "#000",
+            "selected_bg": "#ff1493",
+            "normal_text": "#ff1493",
+            "selected_text": "#000",
+            "normal_border": "#000"
+        },
+        "font": {
+            "name": "main_font",
+            "size": 15
+        }
+    }
+}

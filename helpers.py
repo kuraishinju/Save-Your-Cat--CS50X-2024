@@ -73,6 +73,14 @@ def paragraph(text, width, height, center_p, font, tcolor, bcolor, just, space):
     content = render_textrect(long, font, rect, tcolor, bcolor, justification=just, line_spacing=space)
     return content, rect
 
+# TODO animazione hover della scelta
+def choice_hover(event):
+    return
+
+# TODO registra scelta
+def choice(event):
+    return
+
 # * helpers menu
 def selected_hover(font, text, name, black, pink, blue, cl, ms):
     content = font.render(
@@ -83,14 +91,18 @@ def selected_hover(font, text, name, black, pink, blue, cl, ms):
     )
     return content
 
-# TODO
 def requirements(selected_class, cat_name):
     # class
     if selected_class not in ["knight", "adv", "wiz"]:
+        print("Invalid class")
         return False
     # max strlen
     if len(cat_name) > 10:
+        print("Invalid lenght")
         return False
     # alphanum
     if not cat_name.isalpha():
+        print("Invalid character")
         return False
+    else:
+        return True
