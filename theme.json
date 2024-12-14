@@ -8,7 +8,8 @@
             "normal_border": "#000"
         },
         "font": {
-            "name": "main_font",
+            "name": "Retro Gaming",
+            "regular_path": "Retro_Gaming.ttf",
             "size": 15
         }
     }

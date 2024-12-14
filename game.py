@@ -57,10 +57,10 @@ class Menu:
 
         # casella nome gatto
         self.cat_in = pygame_gui.elements.UITextEntryLine(
-            relative_rect = pygame.Rect(280, 350, 150, 30),
+            relative_rect = pygame.Rect(290, 350, 150, 30),
             manager=self.manager,
             object_id="#cat_name",
-            placeholder_text="Enter name here"
+            placeholder_text="Enter name"
         )
 
         # casella errore
@@ -169,16 +169,16 @@ class State1:
         # scelta 2
 
     #
-    choice_hover(self, event)
+    #choice_hover(self, event)
     
-    def path(self, event):
-        choice(event)
+    #def path(self, event):
+        #choice(event)
         #if ? == 1:
             #return
         #if ? == 2:
             #return
         #else return error e print("Error")
-        return
+        #return
     
     def draw(self, screen):
         screen.blit(self.testo, self.testo_rect)

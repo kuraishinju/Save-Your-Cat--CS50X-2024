@@ -18,7 +18,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 manager = pygame_gui.UIManager((SCREEN_HEIGHT, SCREEN_WIDTH), "theme.json")
 
 # fonts
-main_font = "Retro Gaming.ttf"
+main_font = "Retro_Gaming.ttf"
 font_title = pygame.font.Font(main_font, 50)
 font_footer = pygame.font.Font(main_font, 14)
 font_text = pygame.font.Font(main_font, 15)
