@@ -159,14 +159,21 @@ class Menu:
 
 # * Screen 1
 class State1:
-    def __init__(self, font_text, pink, blue, selected_class, cat_name, game_state):
+    def __init__(self, font_text, pink, blue, cat_name, game_state):
+        self.game_state = game_state
+        self.cat_name = cat_name
+
         # testo
-        self.testo, self.testo_rect = simple_text(font_text, "prova", pink, (100, 350)
-        )
+        self.story_text = f"You come back home from a long work day at the king's castle when… you don't hear {self.cat_name} meowing, complaining that you didn't give them their favorite food but some chicken (how many times do they have to tell you that they love salmon but absolutely despise chicken?!) You are in shock, {self.cat_name} definetly has been kidnapped by the enemy kingdom: the Land of Retrievers! What do you do?"
+        self.story, self.story_rect = paragraph(self.story_text, 500, 250, (350, 230), font_text, pink, "Black", 0, 4)
 
         # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, "1. You look for some clues", blue, (100, 350)
+        )
 
         # scelta 2
+        self.scelta2, self.scelta2_rect = simple_text(font_text, "2. You pack up for the journey and leave at once", blue, (100, 350)
+        )
 
     #
     #choice_hover(self, event)
@@ -181,4 +188,5 @@ class State1:
         #return
     
     def draw(self, screen):
-        screen.blit(self.testo, self.testo_rect)
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)

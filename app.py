@@ -37,7 +37,7 @@ game_state = "menu"
 
 # * imported classes
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
-s1 = State1(font_text, pink, blue, selected_class, cat_name, game_state)
+s1 = State1(font_text, pink, blue, cat_name, game_state)
 
 # * MAIN LOOP
 while True:
