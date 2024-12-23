@@ -110,14 +110,13 @@ def color_hover(font, text, name, black, pink, blue, ms):
 
 # registra scelta DOPPIA
 def choice(event, scelta, scelta2, state, state_a, state_b):
-    if event.type == MOUSEBUTTONDOWN:
-        mouse_pos = pygame.mouse.get_pos()
-        if scelta.collidepoint(mouse_pos):
-            state = state_a
-        elif scelta2.collidepoint(mouse_pos):
-            state = state_b
-        else:
-            print("Input error during choice")
+    mouse_pos = pygame.mouse.get_pos()
+    if scelta.collidepoint(mouse_pos):
+        state = state_a
+    elif scelta2.collidepoint(mouse_pos):
+        state = state_b
+    else:
+        print("Input error during choice")
     return state
 
 # registra scelta SINGOLA

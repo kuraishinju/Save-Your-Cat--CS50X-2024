@@ -76,19 +76,21 @@ while True:
         
         elif game_state == "s1":
             s1.choice_hover(event)
-            new_state = s1.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s2" or new_state == "s3":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEBUTTONDOWN:
+                new_state = s1.path(event)
+                print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+                if new_state != game_state and new_state == "s2" or new_state == "s3":
+                    game_state = new_state
+                    print(f"New state from path: {new_state}")
         
         elif game_state == "s2":
             s2.choice_hover(event)
-            new_state = s2.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s3":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEBUTTONDOWN:
+                new_state = s2.path(event)
+                print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+                if new_state != game_state and new_state == "s3":
+                    game_state = new_state
+                    print(f"New state from path: {new_state}")
         
         elif game_state == "s3":
             s3.choice_hover(event)
