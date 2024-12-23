@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import MOUSEBUTTONDOWN, MOUSEMOTION
 
 # * funzione testo lungo
 class TextRectException:
@@ -73,13 +74,62 @@ def paragraph(text, width, height, center_p, font, tcolor, bcolor, just, space):
     content = render_textrect(long, font, rect, tcolor, bcolor, justification=just, line_spacing=space)
     return content, rect
 
-# TODO animazione hover della scelta
-def choice_hover(event):
-    return
+# animazione hover della scelta DOPPIA
+def choice_hover_ex(event, scelta, scelta2, pos):
+    if event.type == MOUSEMOTION:
+        mouse_pos = pygame.mouse.get_pos()
+        if scelta.collidepoint(mouse_pos):
+            pos = "scelta"
+            return pos
+        elif scelta2.collidepoint(mouse_pos):
+            pos = "scelta2"
+            return pos
+        else:
+            pos = None
+            return pos
+        
+# animazione hover della scelta SINGOLA
+def choice_hover_ex_s(event, scelta, pos):
+    if event.type == MOUSEMOTION:
+        mouse_pos = pygame.mouse.get_pos()
+        if scelta.collidepoint(mouse_pos):
+            pos = "scelta"
+            return pos
+        else:
+            pos = None
+            return pos
 
-# TODO registra scelta
-def choice(event):
-    return
+# colore hover
+def color_hover(font, text, name, black, pink, blue, ms):
+    content = font.render(
+        text,
+        False,
+        black if ms == name else pink,
+        blue if ms == name else black
+    )
+    return content
+
+# registra scelta DOPPIA
+def choice(event, scelta, scelta2, state, state_a, state_b):
+    if event.type == MOUSEBUTTONDOWN:
+        mouse_pos = pygame.mouse.get_pos()
+        if scelta.collidepoint(mouse_pos):
+            state = state_a
+        elif scelta2.collidepoint(mouse_pos):
+            state = state_b
+        else:
+            print("Input error during choice")
+    return state
+
+# registra scelta SINGOLA
+def choice_s(event, scelta, state, state_a):
+    if event.type == MOUSEBUTTONDOWN:
+        mouse_pos = pygame.mouse.get_pos()
+        if scelta.collidepoint(mouse_pos):
+            state = state_a
+        else:
+            print("Input error during choice")
+    return state
 
 # * helpers menu
 def selected_hover(font, text, name, black, pink, blue, cl, ms):

@@ -1,8 +1,8 @@
 import pygame
 import pygame_gui
-from pygame.locals import QUIT
+from pygame.locals import QUIT, MOUSEMOTION
 from sys import exit
-from game import Menu, State1
+from game import *
 
 pygame.init()
 
@@ -30,14 +30,16 @@ blue = pygame.Color("cyan2")
 # background image
 background_image = pygame.image.load("graphics/cat.png").convert_alpha()
 
-# * CHOICES
-selected_class = None
-cat_name = None
-game_state = "menu"
+# TODO CHOICES
+selected_class = "adv"
+cat_name = "Mary"
+game_state = "s1"
 
 # * imported classes
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
-s1 = State1(font_text, pink, blue, cat_name, game_state)
+s1 = State1(font_text, pink, cat_name, game_state)
+s2 = State2(font_text, pink, cat_name, game_state)
+s3 = State3(font_text, pink, cat_name, game_state, selected_class)
 
 # * MAIN LOOP
 while True:
@@ -60,8 +62,17 @@ while True:
             selected_class = menu.class_selection(event)
             cat_name, game_state = menu.cat_naming(event)
         
-        #if game_state == "s1":
-            #s1.choice_hover(event)
+        if game_state == "s1":
+            s1.choice_hover(event)
+            game_state = s1.path(event)
+        
+        if game_state == "s2":
+            s2.choice_hover(event)
+            game_state = s2.path(event)
+        
+        if game_state == "s3":
+            s3.choice_hover(event)
+            game_state = s3.path(event)
 
     # background
     screen.fill("Black")
@@ -72,7 +83,13 @@ while True:
         menu.draw(screen, fps, font_text, pink, blue)
     
     if game_state == "s1":
-        s1.draw(screen)
+        s1.draw(screen, font_text, pink, blue)
+    
+    if game_state == "s2":
+        s2.draw(screen, font_text, pink, blue)
+    
+    if game_state == "s3":
+        s3.draw(screen, font_text, pink, blue)
 
     # funzione update della finestra
     pygame.display.update()
