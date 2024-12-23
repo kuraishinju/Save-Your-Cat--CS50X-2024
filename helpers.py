@@ -94,10 +94,9 @@ def choice_hover_ex_s(event, scelta, pos):
         mouse_pos = pygame.mouse.get_pos()
         if scelta.collidepoint(mouse_pos):
             pos = "scelta"
-            return pos
         else:
             pos = None
-            return pos
+    return pos
 
 # colore hover
 def color_hover(font, text, name, black, pink, blue, ms):

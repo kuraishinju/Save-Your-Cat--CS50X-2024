@@ -238,9 +238,8 @@ class State2:
 
 # * Screen 3
 class State3:
-    def __init__(self, font_text, pink, cat_name, game_state, selected_class):
+    def __init__(self, font_text, pink, game_state, selected_class):
         self.game_state = game_state
-        self.cat_name = cat_name
         self.selected_class = selected_class
         self.mouse = None
 
@@ -288,3 +287,287 @@ class State3:
         screen.blit(self.story, self.story_rect)
         screen.blit(self.scelta, self.scelta_rect)
         screen.blit(self.scelta2, self.scelta2_rect)
+
+# * Screen 4
+class State4:
+    def __init__(self, font_text, pink, cat_name, game_state):
+        self.game_state = game_state
+        self.cat_name = cat_name
+        self.mouse = None
+
+        # testo
+        self.story_text = (f"Since night is approaching, you choose to check if the kidnappers stopped by the only inn in the area to rest and have supper. You walk into the building and are met with the delicious smell of salmon soup... wait... you forgot to bring with you the salmon for {self.cat_name}! How could you?! But you have no time to spare and need to catch up with the kidnappers (who are not there).")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+        # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, "1. Screw it, I need to retrieve some salmon!", pink, (350, 360)
+        )
+
+        # scelta 2
+        self.scelta2, self.scelta2_rect = simple_text(font_text, "2. You ask the inn keeper if someone passed by", pink, (350, 395)
+        )
+
+    # funzioni
+    def choice_hover(self, event):
+        self.mouse = choice_hover_ex(event, self.scelta_rect, self.scelta2_rect, self.mouse)
+    
+    def path(self, event):
+        self.state_a = "e1"
+        self.state_b = "s6"
+        self.game_state = choice(event, self.scelta_rect, self.scelta2_rect, self.game_state, self.state_a, self.state_b)
+        return self.game_state
+    
+    def draw(self, screen, font_text, pink, blue):
+        # hover
+        self.scelta = color_hover(
+            font_text, "1. Screw it, I need to retrieve some salmon!", "scelta", "Black", pink, blue, self.mouse
+        )
+        self.scelta2 = color_hover(
+            font_text, "2. You ask the inn keeper if someone passed by", "scelta2", "Black", pink, blue, self.mouse
+        )
+
+        # schermata
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)
+        screen.blit(self.scelta2, self.scelta2_rect)
+
+# * Screen 5
+class State5:
+    def __init__(self, font_text, pink, cat_name, game_state):
+        self.game_state = game_state
+        self.cat_name = cat_name
+        self.mouse = None
+
+        # testo
+        self.story_text = (f"You have no time to spare, you rush towards the Land of Retrievers and run through the woods all night, determined to save {self.cat_name}. No wild animals dare to approach you out of fear. As morning comes you walk through the gates of the kingdom and find yourself surrounded by people and… dogs. What a nightmare! (... You liar, you love dogs, you just never had the courage to tell {self.cat_name}). You catch a glimpse of a sketchy man with a cage with a cat inside, but no sight of {self.cat_name}.")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+        # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, f"1. You have no time to waste, look for {self.cat_name}", pink, (350, 360)
+        )
+
+        # scelta 2
+        self.scelta2, self.scelta2_rect = simple_text(font_text, "2. Save that cat!", pink, (350, 395)
+        )
+
+    # funzioni
+    def choice_hover(self, event):
+        self.mouse = choice_hover_ex(event, self.scelta_rect, self.scelta2_rect, self.mouse)
+    
+    def path(self, event):
+        self.state_a = "s7"
+        self.state_b = "s8"
+        self.game_state = choice(event, self.scelta_rect, self.scelta2_rect, self.game_state, self.state_a, self.state_b)
+        return self.game_state
+    
+    def draw(self, screen, font_text, pink, blue):
+        # hover
+        self.scelta = color_hover(
+            font_text, f"1. You have no time to waste, look for {self.cat_name}", "scelta", "Black", pink, blue, self.mouse
+        )
+        self.scelta2 = color_hover(
+            font_text, "2. Save that cat!", "scelta2", "Black", pink, blue, self.mouse
+        )
+
+        # schermata
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)
+        screen.blit(self.scelta2, self.scelta2_rect)
+
+# * Screen 6
+class State6:
+    def __init__(self, font_text, pink, game_state, selected_class):
+        self.game_state = game_state
+        self.selected_class = selected_class
+        self.mouse = None
+
+        # testo
+        self.cl = None
+        if self.selected_class == "knight":
+            self.cl = "sword and shield"
+        elif self.selected_class == "adv":
+            self.cl = "menacing bow"
+        elif self.selected_class == "wiz":
+            self.cl = "spell book"
+
+        self.story_text = (f"The inn keeper, intimidated by your {self.cl}, stutters and tells you that someone stopped by less than half an hour ago and was carrying with them a cat in a cage. Furious with rage you ask them the direction and go...")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+        # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, "1. North west, straight towards the enemy kingdom", pink, (350, 360)
+        )
+
+    # funzioni
+    def choice_hover(self, event):
+        self.mouse = choice_hover_ex_s(event, self.scelta_rect, self.mouse)
+    
+    def path(self, event):
+        self.state_a = "s5"
+        self.game_state = choice_s(event, self.scelta_rect, self.game_state, self.state_a)
+        return self.game_state
+    
+    def draw(self, screen, font_text, pink, blue):
+        # hover
+        self.scelta = color_hover(
+            font_text, "1. North west, straight towards the enemy kingdom", "scelta", "Black", pink, blue, self.mouse
+        )
+
+        # schermata
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)
+
+# * Screen 7
+class State7:
+    def __init__(self, font_text, pink, game_state):
+        self.game_state = game_state
+        self.mouse = None
+
+        self.story_text = (f"WHAT?! You abandon that poor cat?!")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+        # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, "1. No, you ABSOLUTELY save the cat!", pink, (350, 360)
+        )
+
+    # funzioni
+    def choice_hover(self, event):
+        self.mouse = choice_hover_ex_s(event, self.scelta_rect, self.mouse)
+    
+    def path(self, event):
+        self.state_a = "s8"
+        self.game_state = choice_s(event, self.scelta_rect, self.game_state, self.state_a)
+        return self.game_state
+    
+    def draw(self, screen, font_text, pink, blue):
+        # hover
+        self.scelta = color_hover(
+            font_text, "1. No, you ABSOLUTELY save that cat!", "scelta", "Black", pink, blue, self.mouse
+        )
+
+        # schermata
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)
+
+# * Screen 8
+class State8:
+    def __init__(self, font_text, pink, game_state, selected_class, cat_name):
+        self.game_state = game_state
+        self.cat_name = cat_name
+        self.selected_class = selected_class
+        self.mouse = None
+
+        # testo
+        self.cl = None
+        if self.selected_class == "knight":
+            self.cl = "sword"
+        elif self.selected_class == "adv":
+            self.cl = "bow"
+        elif self.selected_class == "wiz":
+            self.cl = "spell book"
+
+        self.story_text = (f"You approach the sketchy man who, intimidated by your {self.cl} drops the cage and runs in fear. Nobody seems to care about you and that man. You hear a voice from the cage telling you: <Thank you my saviour! Oh, I recognize you! You are {self.cat_name}'s servant! The one who forgot about the salmon! You must be so worried about them... Bring me back to your house and I will tell you where {self.cat_name} is!>")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+        # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, "1. Well... all right, let's go back.", pink, (350, 360)
+        )
+
+        # scelta 2
+        self.scelta2, self.scelta2_rect = simple_text(font_text, f"2. No way, you leave and go look for {self.cat_name}", pink, (350, 395)
+        )
+
+    # funzioni
+    def choice_hover(self, event):
+        self.mouse = choice_hover_ex(event, self.scelta_rect, self.scelta2_rect, self.mouse)
+    
+    def path(self, event):
+        self.state_a = "e2"
+        self.state_b = "s9"
+        self.game_state = choice(event, self.scelta_rect, self.scelta2_rect, self.game_state, self.state_a, self.state_b)
+        return self.game_state
+    
+    def draw(self, screen, font_text, pink, blue):
+        # hover
+        self.scelta = color_hover(
+            font_text, "1. Well... all right, let's go back.", "scelta", "Black", pink, blue, self.mouse
+        )
+        self.scelta2 = color_hover(
+            font_text, f"2. No way, you leave and go look for {self.cat_name}", "scelta2", "Black", pink, blue, self.mouse
+        )
+
+        # schermata
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)
+        screen.blit(self.scelta2, self.scelta2_rect)
+
+# * Screen 9
+class State9:
+    def __init__(self, font_text, pink, game_state):
+        self.game_state = game_state
+        self.mouse = None
+
+        self.story_text = (f"REALLY?!")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+        # scelta 1
+        self.scelta, self.scelta_rect = simple_text(font_text, "1. No no, I listen to the cat and save her!", pink, (350, 360)
+        )
+
+    # funzioni
+    def choice_hover(self, event):
+        self.mouse = choice_hover_ex_s(event, self.scelta_rect, self.mouse)
+    
+    def path(self, event):
+        self.state_a = "e2"
+        self.game_state = choice_s(event, self.scelta_rect, self.game_state, self.state_a)
+        return self.game_state
+    
+    def draw(self, screen, font_text, pink, blue):
+        # hover
+        self.scelta = color_hover(
+            font_text, "1. No no, I listen to the cat and save her", "scelta", "Black", pink, blue, self.mouse
+        )
+
+        # schermata
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.scelta, self.scelta_rect)
+
+# TODO Ending 1
+class Ending1:
+    def __init__(self, font_text, pink, cat_name, game_state):
+        self.game_state = game_state
+        self.cat_name = cat_name
+        self.mouse = None
+
+        # testo
+        self.story_text = (f"You approach the inn keeper and kindly ask them for some salmon, explaining your misadventure. She starts laughing at you and you are enraged: <How dare you!> But she quickly tells you that {self.cat_name}, actually, is in the kitchen eating salmon by themselves because you were so distracted by work that you dared to forget what their favorite food was! You reunite with {self.cat_name} (after they meow at you all of their complaints) and go straight back home. I hope that from now on you will never forget to give them salmon again!")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+    # funzioni  
+    def draw(self, screen, font_text, pink, blue):
+        # schermata
+        screen.blit(self.story, self.story_rect)
+
+# TODO Ending 2
+class Ending2:
+    def __init__(self, font_text, pink, cat_name, game_state):
+        self.game_state = game_state
+        self.cat_name = cat_name
+        self.mouse = None
+
+        # testo
+        self.story_text = (f"It takes you a few hours, but eventually you get home in the evening. The cat (whose name is Miss Fluffy, at least that's what she said) looks at you satisfied and tells you: <Well... {self.cat_name} is actually happily eating salmon at the inn in the woods. They run away from home because you gave them chicken. Maybe next time be more mindful! They will be back soon, don't worry.> A few hours pass and {self.cat_name} is back home complaining about your ineptitude as a servant, while Pizza already went back home to her's (equally incompetent).")
+
+        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+
+    # funzioni  
+    def draw(self, screen, font_text, pink, blue):
+        # schermata
+        screen.blit(self.story, self.story_rect)

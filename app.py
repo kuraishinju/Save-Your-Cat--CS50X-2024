@@ -39,7 +39,15 @@ game_state = "s1"
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
 s1 = State1(font_text, pink, cat_name, game_state)
 s2 = State2(font_text, pink, cat_name, game_state)
-s3 = State3(font_text, pink, cat_name, game_state, selected_class)
+s3 = State3(font_text, pink, game_state, selected_class)
+s4 = State4(font_text, pink, cat_name, game_state)
+s5 = State5(font_text, pink, cat_name, game_state)
+s6 = State6(font_text, pink, game_state, selected_class)
+s7 = State7(font_text, pink, game_state)
+s8 = State8(font_text, pink, game_state, selected_class, cat_name)
+s9 = State9(font_text, pink, game_state)
+e1 = Ending1(font_text, pink, cat_name, game_state)
+e2 = Ending2(font_text, pink, cat_name, game_state)
 
 # * MAIN LOOP
 while True:
@@ -60,19 +68,86 @@ while True:
             manager.process_events(event)
             menu.hover(event)
             selected_class = menu.class_selection(event)
-            cat_name, game_state = menu.cat_naming(event)
+            cat_name, new_state = menu.cat_naming(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s1":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
         
-        if game_state == "s1":
+        elif game_state == "s1":
             s1.choice_hover(event)
-            game_state = s1.path(event)
+            new_state = s1.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s2" or new_state == "s3":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
         
-        if game_state == "s2":
+        elif game_state == "s2":
             s2.choice_hover(event)
-            game_state = s2.path(event)
+            new_state = s2.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s3":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
         
-        if game_state == "s3":
+        elif game_state == "s3":
             s3.choice_hover(event)
-            game_state = s3.path(event)
+            new_state = s3.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s4" or new_state == "s5":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+        
+        elif game_state == "s4":
+            s4.choice_hover(event)
+            new_state = s4.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "e1" or new_state == "s6":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+        
+        elif game_state == "s5":
+            s5.choice_hover(event)
+            new_state = s5.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s7" or new_state == "s8":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+
+        elif game_state == "s6":
+            s6.choice_hover(event)
+            new_state = s6.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s5":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+        
+        elif game_state == "s7":
+            s7.choice_hover(event)
+            new_state = s7.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s8":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+
+        elif game_state == "s8":
+            s8.choice_hover(event)
+            new_state = s8.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "s9" or new_state == "e2":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+
+        elif game_state == "s9":
+            s9.choice_hover(event)
+            new_state = s9.path(event)
+            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+            if new_state != game_state and new_state == "e2":
+                game_state = new_state
+                print(f"New state from path: {new_state}")
+        
+        # TODO elif game_state == "e1":
+        # TODO elif game_state == "e1":
 
     # background
     screen.fill("Black")
@@ -82,14 +157,38 @@ while True:
     if game_state == "menu":
         menu.draw(screen, fps, font_text, pink, blue)
     
-    if game_state == "s1":
+    elif game_state == "s1":
         s1.draw(screen, font_text, pink, blue)
     
-    if game_state == "s2":
+    elif game_state == "s2":
         s2.draw(screen, font_text, pink, blue)
     
-    if game_state == "s3":
+    elif game_state == "s3":
         s3.draw(screen, font_text, pink, blue)
+    
+    elif game_state == "s4":
+        s4.draw(screen, font_text, pink, blue)
+    
+    elif game_state == "s5":
+        s5.draw(screen, font_text, pink, blue)
+
+    elif game_state == "s6":
+        s6.draw(screen, font_text, pink, blue)
+
+    elif game_state == "s7":
+        s7.draw(screen, font_text, pink, blue)
+
+    elif game_state == "s8":
+        s8.draw(screen, font_text, pink, blue)
+
+    elif game_state == "s9":
+        s9.draw(screen, font_text, pink, blue)
+
+    elif game_state == "e1":
+        e1.draw(screen, font_text, pink, blue)
+
+    elif game_state == "e2":
+        e2.draw(screen, font_text, pink, blue)
 
     # funzione update della finestra
     pygame.display.update()
