@@ -37,6 +37,7 @@ game_state = "s1"
 
 # * imported classes
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
+# TODO dizionario
 s1 = State1(font_text, pink, cat_name, game_state)
 s2 = State2(font_text, pink, cat_name, game_state)
 s3 = State3(font_text, pink, game_state, selected_class)
@@ -73,6 +74,8 @@ while True:
             if new_state != game_state and new_state == "s1":
                 game_state = new_state
                 print(f"New state from path: {new_state}")
+        
+        # TODO mappa
         
         elif game_state == "s1":
             s1.choice_hover(event)
@@ -158,6 +161,8 @@ while True:
     # * game states drawing
     if game_state == "menu":
         menu.draw(screen, fps, font_text, pink, blue)
+    
+    # TODO loop
     
     elif game_state == "s1":
         s1.draw(screen, font_text, pink, blue)
