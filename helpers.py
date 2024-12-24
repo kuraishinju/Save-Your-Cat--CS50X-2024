@@ -121,12 +121,11 @@ def choice(event, scelta, scelta2, state, state_a, state_b):
 
 # registra scelta SINGOLA
 def choice_s(event, scelta, state, state_a):
-    if event.type == MOUSEBUTTONDOWN:
-        mouse_pos = pygame.mouse.get_pos()
-        if scelta.collidepoint(mouse_pos):
-            state = state_a
-        else:
-            print("Input error during choice")
+    mouse_pos = pygame.mouse.get_pos()
+    if scelta.collidepoint(mouse_pos):
+        state = state_a
+    else:
+        print("Input error during choice")
     return state
 
 # * helpers menu

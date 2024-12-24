@@ -64,44 +64,40 @@ while True:
             # uscita dal loop e chiusura
             exit()
 
-        # * eventi game states
+        # * MENU
         if game_state == "menu":
             manager.process_events(event)
-            menu.hover(event)
-            selected_class = menu.class_selection(event)
-            cat_name, new_state = menu.cat_naming(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s1":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
-        
-        # TODO mappa
-        
-        elif game_state == "s1":
-            s1.choice_hover(event)
+            if event.type == MOUSEMOTION:
+                menu.hover(event)
             if event.type == MOUSEBUTTONDOWN:
-                new_state = s1.path(event)
-                print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-                if new_state != game_state and new_state == "s2" or new_state == "s3":
-                    game_state = new_state
-                    print(f"New state from path: {new_state}")
+                selected_class = menu.class_selection(event)
+                cat_name, game_state = menu.cat_naming(event)
+                print(f"Menu: Current game_state: {game_state}")
+        
+        # TODO loop       
+        elif game_state == "s1":
+            if event.type == MOUSEMOTION:
+                s1.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s1.path(event)
+                print(f"Menu: Current game_state: {game_state}")
         
         elif game_state == "s2":
-            s2.choice_hover(event)
+            if event.type == MOUSEMOTION:
+                s2.choice_hover(event)
             if event.type == MOUSEBUTTONDOWN:
-                new_state = s2.path(event)
-                print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-                if new_state != game_state and new_state == "s3":
-                    game_state = new_state
-                    print(f"New state from path: {new_state}")
+                game_state = s2.path(event)
+                print(f"Menu: Current game_state: {game_state}")
         
         elif game_state == "s3":
-            s3.choice_hover(event)
-            new_state = s3.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s4" or new_state == "s5":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s3.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s3.path(event)
+                print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
+                if new_state != game_state and new_state == "s4" or new_state == "s5":
+                    game_state = new_state
+                    print(f"New state from path: {new_state}")
         
         elif game_state == "s4":
             s4.choice_hover(event)
