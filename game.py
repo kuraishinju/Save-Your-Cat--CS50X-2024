@@ -76,47 +76,44 @@ class Menu:
     # * events
     def class_selection(self, event):
         # Gestisce la selezione della classe
-        if event.type == MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-            if self.knight_rect.collidepoint(mouse_pos):
-                # print debug statements
-                print("Knight clicked!")
-                self.selected_class = "knight"
-            elif self.adv_rect.collidepoint(mouse_pos):
-                print("adv clicked!")
-                self.selected_class = "adv"
-            elif self.wiz_rect.collidepoint(mouse_pos):
-                print("wiz clicked!")
-                self.selected_class = "wiz"
+        mouse_pos = pygame.mouse.get_pos()
+        if self.knight_rect.collidepoint(mouse_pos):
+            # print debug statements
+            print("Knight clicked!")
+            self.selected_class = "knight"
+        elif self.adv_rect.collidepoint(mouse_pos):
+            print("adv clicked!")
+            self.selected_class = "adv"
+        elif self.wiz_rect.collidepoint(mouse_pos):
+            print("wiz clicked!")
+            self.selected_class = "wiz"
         return self.selected_class
     
     
     def cat_naming(self, event):
-        if event.type == MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-            if self.play_rect.collidepoint(mouse_pos):
-                self.cat_name = capwords(self.cat_in.get_text())
-                print(self.cat_name)
-                if requirements(self.selected_class, self.cat_name):
-                    self.game_state = "s1"
-                    return self.cat_name, self.game_state
-                else:
-                    self.error = 1
+        mouse_pos = pygame.mouse.get_pos()
+        if self.play_rect.collidepoint(mouse_pos):
+            self.cat_name = capwords(self.cat_in.get_text())
+            print(self.cat_name)
+            if requirements(self.selected_class, self.cat_name):
+                self.game_state = "s1"
+                return self.cat_name, self.game_state
+            else:
+                self.error = 1
         return None, "menu"
 
     def hover(self, event):
-        if event.type == MOUSEMOTION:
-            mouse_pos = pygame.mouse.get_pos()
-            if self.knight_rect.collidepoint(mouse_pos):
-                self.mouse = "knight"
-            elif self.adv_rect.collidepoint(mouse_pos):
-                self.mouse = "adv"
-            elif self.wiz_rect.collidepoint(mouse_pos):
-                self.mouse = "wiz"
-            elif self.play_rect.collidepoint(mouse_pos):
-                self.mouse = "play"
-            else:
-                self.mouse = None
+        mouse_pos = pygame.mouse.get_pos()
+        if self.knight_rect.collidepoint(mouse_pos):
+            self.mouse = "knight"
+        elif self.adv_rect.collidepoint(mouse_pos):
+            self.mouse = "adv"
+        elif self.wiz_rect.collidepoint(mouse_pos):
+            self.mouse = "wiz"
+        elif self.play_rect.collidepoint(mouse_pos):
+            self.mouse = "play"
+        else:
+            self.mouse = None
 
     # * draw
     def draw(self, screen, fps, font_text, pink, blue):
@@ -538,36 +535,148 @@ class State9:
         screen.blit(self.story, self.story_rect)
         screen.blit(self.scelta, self.scelta_rect)
 
-# TODO Ending 1
+# * Ending 1
 class Ending1:
-    def __init__(self, font_text, pink, cat_name, game_state):
+    def __init__(self, font_text, font_title, pink, cat_name, game_state, selected_class):
         self.game_state = game_state
         self.cat_name = cat_name
+        self.selected_class = selected_class
         self.mouse = None
+
+        # titolo
+        self.title, self.title_rect = simple_text(font_title, "You got the Salmon Ending!", pink, (350, 70))
 
         # testo
         self.story_text = (f"You approach the inn keeper and kindly ask them for some salmon, explaining your misadventure. She starts laughing at you and you are enraged: <How dare you!> But she quickly tells you that {self.cat_name}, actually, is in the kitchen eating salmon by themselves because you were so distracted by work that you dared to forget what their favorite food was! You reunite with {self.cat_name} (after they meow at you all of their complaints) and go straight back home. I hope that from now on you will never forget to give them salmon again!")
 
-        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+        self.story, self.story_rect = paragraph(self.story_text, 550, 300, (350, 280), font_text, pink, "Black", 0, 4)
+
+        # bottoni
+        self.exit_button, self.exit_rect = paragraph(
+            "+---------------+\n|  EXIT GAME  |\n+---------------+", 150, 61, (200, 400), font_text, pink, "Black", 1, 0
+        )
+
+        self.menu_button, self.menu_rect = paragraph(
+            "+-------------------+\n|  BACK TO MENU  |\n+-------------------+", 190, 61, (500, 400), font_text, pink, "Black", 1, 0
+        )
+
+    def hover(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.menu_rect.collidepoint(mouse_pos):
+            self.mouse = "menu"
+        elif self.exit_rect.collidepoint(mouse_pos):
+            self.mouse = "exit"
+        else:
+            self.mouse = None
+
+    def path(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.menu_rect.collidepoint(mouse_pos):
+            self.game_state = "menu"
+            self.cat_name = None
+            self.selected_class = None
+            return self.game_state, self.cat_name, self.selected_class
+        elif self.exit_rect.collidepoint(mouse_pos):
+            pygame.quit()
+            return None
+            exit()
 
     # funzioni  
     def draw(self, screen, font_text, pink, blue):
-        # schermata
-        screen.blit(self.story, self.story_rect)
+        self.exit_button = render_textrect(
+            "+---------------+\n|  QUIT GAME  |\n+---------------+",
+            font_text,
+            self.exit_rect,
+            blue if self.mouse == "exit" else pink,
+            "Black",
+            justification=1,
+            line_spacing=0
+        )
 
-# TODO Ending 2
+        self.menu_button = render_textrect(
+            "+-------------------+\n|  BACK TO MENU  |\n+-------------------+",
+            font_text,
+            self.menu_rect,
+            blue if self.mouse == "menu" else pink,
+            "Black",
+            justification=1,
+            line_spacing=0
+        )
+
+        # schermata
+        screen.blit(self.title, self.title_rect)
+        screen.blit(self.story, self.story_rect)
+        screen.blit(self.exit_button, self.exit_rect)
+        screen.blit(self.menu_button, self.menu_rect)
+
+# * Ending 2
 class Ending2:
-    def __init__(self, font_text, pink, cat_name, game_state):
+    def __init__(self, font_text, font_title, pink, cat_name, game_state, selected_class):
         self.game_state = game_state
         self.cat_name = cat_name
+        self.selected_class = selected_class
         self.mouse = None
+
+        # titolo
+        self.title, self.title_rect = simple_text(font_title, "You got the Fluffy Ending!", pink, (350, 70))
 
         # testo
         self.story_text = (f"It takes you a few hours, but eventually you get home in the evening. The cat (whose name is Miss Fluffy, at least that's what she said) looks at you satisfied and tells you: <Well... {self.cat_name} is actually happily eating salmon at the inn in the woods. They run away from home because you gave them chicken. Maybe next time be more mindful! They will be back soon, don't worry.> A few hours pass and {self.cat_name} is back home complaining about your ineptitude as a servant, while Pizza already went back home to her's (equally incompetent).")
 
-        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 220), font_text, pink, "Black", 0, 4)
+        self.story, self.story_rect = paragraph(self.story_text, 550, 300, (350, 280), font_text, pink, "Black", 0, 4)
+
+        # bottoni
+        self.exit_button, self.exit_rect = paragraph(
+            "+---------------+\n|  EXIT GAME  |\n+---------------+", 150, 61, (200, 400), font_text, pink, "Black", 1, 0
+        )
+
+        self.menu_button, self.menu_rect = paragraph(
+            "+-------------------+\n|  BACK TO MENU  |\n+-------------------+", 190, 61, (500, 400), font_text, pink, "Black", 1, 0
+        )
+
+    def hover(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.menu_rect.collidepoint(mouse_pos):
+            self.mouse = "menu"
+        elif self.exit_rect.collidepoint(mouse_pos):
+            self.mouse = "exit"
+        else:
+            self.mouse = None
+
+    def path(self, event):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.menu_rect.collidepoint(mouse_pos):
+            self.game_state = "menu"
+            self.cat_name = None
+            self.selected_class = None
+            return self.game_state, self.cat_name, self.selected_class
+        elif self.exit_rect.collidepoint(mouse_pos):
+            return None
 
     # funzioni  
     def draw(self, screen, font_text, pink, blue):
+        self.exit_button = render_textrect(
+            "+---------------+\n|  QUIT GAME  |\n+---------------+",
+            font_text,
+            self.exit_rect,
+            blue if self.mouse == "exit" else pink,
+            "Black",
+            justification=1,
+            line_spacing=0
+        )
+
+        self.menu_button = render_textrect(
+            "+-------------------+\n|  BACK TO MENU  |\n+-------------------+",
+            font_text,
+            self.menu_rect,
+            blue if self.mouse == "menu" else pink,
+            "Black",
+            justification=1,
+            line_spacing=0
+        )
+
         # schermata
+        screen.blit(self.title, self.title_rect)
         screen.blit(self.story, self.story_rect)
+        screen.blit(self.exit_button, self.exit_rect)
+        screen.blit(self.menu_button, self.menu_rect)

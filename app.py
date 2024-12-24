@@ -22,6 +22,7 @@ main_font = "Retro_Gaming.ttf"
 font_title = pygame.font.Font(main_font, 50)
 font_footer = pygame.font.Font(main_font, 14)
 font_text = pygame.font.Font(main_font, 15)
+font_ending = pygame.font.Font(main_font, 25)
 
 # colors
 pink = pygame.Color("deeppink")
@@ -47,8 +48,9 @@ s6 = State6(font_text, pink, game_state, selected_class)
 s7 = State7(font_text, pink, game_state)
 s8 = State8(font_text, pink, game_state, selected_class, cat_name)
 s9 = State9(font_text, pink, game_state)
-e1 = Ending1(font_text, pink, cat_name, game_state)
-e2 = Ending2(font_text, pink, cat_name, game_state)
+
+e1 = Ending1(font_text, font_ending, pink, cat_name, game_state, selected_class)
+e2 = Ending2(font_text, font_ending, pink, cat_name, game_state, selected_class)
 
 # * MAIN LOOP
 while True:
@@ -94,61 +96,55 @@ while True:
                 s3.choice_hover(event)
             if event.type == MOUSEBUTTONDOWN:
                 game_state = s3.path(event)
-                print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-                if new_state != game_state and new_state == "s4" or new_state == "s5":
-                    game_state = new_state
-                    print(f"New state from path: {new_state}")
+                print(f"Menu: Current game_state: {game_state}")
         
         elif game_state == "s4":
-            s4.choice_hover(event)
-            new_state = s4.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "e1" or new_state == "s6":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s4.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s4.path(event)
         
         elif game_state == "s5":
-            s5.choice_hover(event)
-            new_state = s5.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s7" or new_state == "s8":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s5.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s5.path(event)
 
         elif game_state == "s6":
-            s6.choice_hover(event)
-            new_state = s6.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s5":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s6.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s6.path(event)
         
         elif game_state == "s7":
-            s7.choice_hover(event)
-            new_state = s7.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s8":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s7.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s7.path(event)
 
         elif game_state == "s8":
-            s8.choice_hover(event)
-            new_state = s8.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "s9" or new_state == "e2":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s8.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s8.path(event)
 
         elif game_state == "s9":
-            s9.choice_hover(event)
-            new_state = s9.path(event)
-            print(f"Menu: Current game_state: {game_state}, New state: {new_state}")
-            if new_state != game_state and new_state == "e2":
-                game_state = new_state
-                print(f"New state from path: {new_state}")
+            if event.type == MOUSEMOTION:
+                s9.choice_hover(event)
+            if event.type == MOUSEBUTTONDOWN:
+                game_state = s9.path(event)
         
-        # TODO elif game_state == "e1":
-        # TODO elif game_state == "e1":
+        # TODO
+        elif game_state == "e1":
+            if event.type == MOUSEMOTION:
+                e1.hover(event)
+            elif event.type == MOUSEBUTTONDOWN:
+                result = e1.path(event)
+                if result == None:
+                    pygame.quit()
+                    exit()
+                else:
+                    game_state, cat_name, selected_class = result
 
     # background
     screen.fill("Black")

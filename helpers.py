@@ -76,26 +76,24 @@ def paragraph(text, width, height, center_p, font, tcolor, bcolor, just, space):
 
 # animazione hover della scelta DOPPIA
 def choice_hover_ex(event, scelta, scelta2, pos):
-    if event.type == MOUSEMOTION:
-        mouse_pos = pygame.mouse.get_pos()
-        if scelta.collidepoint(mouse_pos):
-            pos = "scelta"
-            return pos
-        elif scelta2.collidepoint(mouse_pos):
-            pos = "scelta2"
-            return pos
-        else:
-            pos = None
-            return pos
+    mouse_pos = pygame.mouse.get_pos()
+    if scelta.collidepoint(mouse_pos):
+        pos = "scelta"
+        return pos
+    elif scelta2.collidepoint(mouse_pos):
+        pos = "scelta2"
+        return pos
+    else:
+        pos = None
+        return pos
         
 # animazione hover della scelta SINGOLA
 def choice_hover_ex_s(event, scelta, pos):
-    if event.type == MOUSEMOTION:
-        mouse_pos = pygame.mouse.get_pos()
-        if scelta.collidepoint(mouse_pos):
-            pos = "scelta"
-        else:
-            pos = None
+    mouse_pos = pygame.mouse.get_pos()
+    if scelta.collidepoint(mouse_pos):
+        pos = "scelta"
+    else:
+        pos = None
     return pos
 
 # colore hover
