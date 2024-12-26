@@ -39,7 +39,7 @@ game_state = "s1"
 # * imported classes
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
 
-# TODO dizionario
+# TODO dizionario states
 s1 = State1(font_text, pink, cat_name, game_state)
 s2 = State2(font_text, pink, cat_name, game_state)
 s3 = State3(font_text, pink, game_state, selected_class)
@@ -67,79 +67,65 @@ while True:
             # uscita dal loop e chiusura
             exit()
 
-        # * MENU
-        if game_state == "menu":
-            manager.process_events(event)
-            if event.type == MOUSEMOTION:
+        if event.type == MOUSEMOTION:
+            if game_state == "menu":
                 menu.hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+            elif game_state == "s1":
+                s1.choice_hover(event)
+            elif game_state == "s2":
+                s2.choice_hover(event)
+            elif game_state == "s3":
+                s3.choice_hover(event)
+            elif game_state == "s4":
+                s4.choice_hover(event)
+            elif game_state == "s5":
+                s5.choice_hover(event)
+            elif game_state == "s6":
+                s6.choice_hover(event)
+            elif game_state == "s7":
+                s7.choice_hover(event)
+            elif game_state == "s8":
+                s8.choice_hover(event)
+            elif game_state == "s9":
+                s9.choice_hover(event)
+            elif game_state == "e1":
+                e1.hover(event)
+            elif game_state == "e2":
+                e2.hover(event)
+
+        if event.type == MOUSEBUTTONDOWN:
+            if game_state == "menu":
                 selected_class = menu.class_selection(event)
                 cat_name, game_state = menu.cat_naming(event)
                 print(f"Menu: Current game_state: {game_state}")
-        
-        # TODO conditionals      
-        elif game_state == "s1":
-            if event.type == MOUSEMOTION:
-                s1.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+            elif game_state == "s1":
                 game_state = s1.path(event)
                 print(f"Menu: Current game_state: {game_state}")
-        
-        elif game_state == "s2":
-            if event.type == MOUSEMOTION:
-                s2.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+            elif game_state == "s2":
                 game_state = s2.path(event)
                 print(f"Menu: Current game_state: {game_state}")
-        
-        elif game_state == "s3":
-            if event.type == MOUSEMOTION:
-                s3.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+            elif game_state == "s3":
                 game_state = s3.path(event)
                 print(f"Menu: Current game_state: {game_state}")
-        
-        elif game_state == "s4":
-            if event.type == MOUSEMOTION:
-                s4.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+            elif game_state == "s4":
                 game_state = s4.path(event)
-        
-        elif game_state == "s5":
-            if event.type == MOUSEMOTION:
-                s5.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+                print(f"Menu: Current game_state: {game_state}")    
+            elif game_state == "s5":
                 game_state = s5.path(event)
-
-        elif game_state == "s6":
-            if event.type == MOUSEMOTION:
-                s6.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+                print(f"Menu: Current game_state: {game_state}")
+            elif game_state == "s6":
                 game_state = s6.path(event)
-        
-        elif game_state == "s7":
-            if event.type == MOUSEMOTION:
-                s7.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+                print(f"Menu: Current game_state: {game_state}")
+            elif game_state == "s7":
                 game_state = s7.path(event)
-
-        elif game_state == "s8":
-            if event.type == MOUSEMOTION:
-                s8.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+                print(f"Menu: Current game_state: {game_state}")
+            elif game_state == "s8":
                 game_state = s8.path(event)
-
-        elif game_state == "s9":
-            if event.type == MOUSEMOTION:
-                s9.choice_hover(event)
-            if event.type == MOUSEBUTTONDOWN:
+                print(f"Menu: Current game_state: {game_state}")
+            elif game_state == "s9":
                 game_state = s9.path(event)
-        
-        # TODO endings
-        elif game_state == "e1":
-            if event.type == MOUSEMOTION:
-                e1.hover(event)
-            elif event.type == MOUSEBUTTONDOWN:
+                print(f"Menu: Current game_state: {game_state}")
+            elif game_state == "e1":
                 result = e1.path(event)
                 if result == None:
                     pygame.quit()
