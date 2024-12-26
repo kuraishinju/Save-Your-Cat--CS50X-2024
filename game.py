@@ -580,6 +580,7 @@ class Ending1:
             pygame.quit()
             return None
             exit()
+        return self.game_state, self.cat_name, self.selected_class
 
     # funzioni  
     def draw(self, screen, font_text, pink, blue):
@@ -652,6 +653,7 @@ class Ending2:
             return self.game_state, self.cat_name, self.selected_class
         elif self.exit_rect.collidepoint(mouse_pos):
             return None
+        return self.game_state, self.cat_name, self.selected_class
 
     # funzioni  
     def draw(self, screen, font_text, pink, blue):

@@ -40,18 +40,17 @@ game_state = "menu"
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
 
 # TODO tutto a None
-s1 = State1(font_text, pink, cat_name, game_state)
-s2 = State2(font_text, pink, cat_name, game_state)
-s3 = State3(font_text, pink, game_state, selected_class)
-s4 = State4(font_text, pink, cat_name, game_state)
-s5 = State5(font_text, pink, cat_name, game_state)
-s6 = State6(font_text, pink, game_state, selected_class)
-s7 = State7(font_text, pink, game_state)
-s8 = State8(font_text, pink, game_state, selected_class, cat_name)
-s9 = State9(font_text, pink, game_state)
-
-e1 = Ending1(font_text, font_ending, pink, cat_name, game_state, selected_class)
-e2 = Ending2(font_text, font_ending, pink, cat_name, game_state, selected_class)
+s1 = None
+s2 = None
+s3 = None
+s4 = None
+s5 = None
+s6 = None
+s7 = None
+s8 = None
+s9 = None
+e1 = None
+e2 = None
 
 # * MAIN LOOP
 while True:
@@ -117,22 +116,31 @@ while True:
             elif game_state == "s1":
                 game_state = s1.path(event)
             elif game_state == "s2":
+                s2 = update_attributes(s2, selected_class)
                 game_state = s2.path(event)
             elif game_state == "s3":
+                s3 = State3(font_text, pink, game_state, selected_class)
                 game_state = s3.path(event)
             elif game_state == "s4":
+                s4 = State4(font_text, pink, cat_name, game_state)
                 game_state = s4.path(event)
             elif game_state == "s5":
+                s5 = State5(font_text, pink, cat_name, game_state)
                 game_state = s5.path(event)
             elif game_state == "s6":
+                s6 = State6(font_text, pink, game_state, selected_class)
                 game_state = s6.path(event)
             elif game_state == "s7":
+                s7 = State7(font_text, pink, game_state)
                 game_state = s7.path(event)
             elif game_state == "s8":
+                s8 = State8(font_text, pink, game_state, selected_class, cat_name)
                 game_state = s8.path(event)
             elif game_state == "s9":
+                s9 = State9(font_text, pink, game_state)
                 game_state = s9.path(event)
             elif game_state == "e1":
+                e1 = Ending1(font_text, font_ending, pink, cat_name, game_state, selected_class)
                 result = e1.path(event)
                 if result == None:
                     pygame.quit()
@@ -140,6 +148,7 @@ while True:
                 else:
                     game_state, cat_name, selected_class = result
             elif game_state == "e2":
+                e2 = Ending2(font_text, font_ending, pink, cat_name, game_state, selected_class)
                 result = e2.path(event)
                 if result == None:
                     pygame.quit()
