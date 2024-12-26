@@ -31,15 +31,15 @@ blue = pygame.Color("cyan2")
 # background image
 background_image = pygame.image.load("graphics/cat.png").convert_alpha()
 
-# TODO CHOICES
-selected_class = "adv"
-cat_name = "Mary"
-game_state = "s1"
+# * CHOICES
+selected_class = None
+cat_name = None
+game_state = "menu"
 
 # * imported classes
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
 
-# TODO dizionario states
+# TODO tutto a None
 s1 = State1(font_text, pink, cat_name, game_state)
 s2 = State2(font_text, pink, cat_name, game_state)
 s3 = State3(font_text, pink, game_state, selected_class)
@@ -67,6 +67,9 @@ while True:
             # uscita dal loop e chiusura
             exit()
 
+        if game_state == "menu":
+            manager.process_events(event)
+        
         if event.type == MOUSEMOTION:
             if game_state == "menu":
                 menu.hover(event)
@@ -97,36 +100,47 @@ while True:
             if game_state == "menu":
                 selected_class = menu.class_selection(event)
                 cat_name, game_state = menu.cat_naming(event)
-                print(f"Menu: Current game_state: {game_state}")
+                if cat_name != None and selected_class != None:
+                    s1 = State1(font_text, pink, cat_name, game_state)
+                    s2 = State2(font_text, pink, cat_name, game_state)
+                    s3 = State3(font_text, pink, game_state, selected_class)
+                    s4 = State4(font_text, pink, cat_name, game_state)
+                    s5 = State5(font_text, pink, cat_name, game_state)
+                    s6 = State6(font_text, pink, game_state, selected_class)
+                    s7 = State7(font_text, pink, game_state)
+                    s8 = State8(font_text, pink, game_state, selected_class, cat_name)
+                    s9 = State9(font_text, pink, game_state)
+
+                    e1 = Ending1(font_text, font_ending, pink, cat_name, game_state, selected_class)
+                    e2 = Ending2(font_text, font_ending, pink, cat_name, game_state, selected_class)
+
             elif game_state == "s1":
                 game_state = s1.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s2":
                 game_state = s2.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s3":
                 game_state = s3.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s4":
                 game_state = s4.path(event)
-                print(f"Menu: Current game_state: {game_state}")    
             elif game_state == "s5":
                 game_state = s5.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s6":
                 game_state = s6.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s7":
                 game_state = s7.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s8":
                 game_state = s8.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "s9":
                 game_state = s9.path(event)
-                print(f"Menu: Current game_state: {game_state}")
             elif game_state == "e1":
                 result = e1.path(event)
+                if result == None:
+                    pygame.quit()
+                    exit()
+                else:
+                    game_state, cat_name, selected_class = result
+            elif game_state == "e2":
+                result = e2.path(event)
                 if result == None:
                     pygame.quit()
                     exit()
@@ -141,7 +155,6 @@ while True:
     if game_state == "menu":
         menu.draw(screen, fps, font_text, pink, blue)
     
-    # TODO loop
     elif game_state == "s1":
         s1.draw(screen, font_text, pink, blue)
     

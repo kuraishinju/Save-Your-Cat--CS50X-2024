@@ -181,8 +181,8 @@ class State1:
     def path(self, event):
         self.state_a = "s2"
         self.state_b = "s3"
-        self.game_state = choice(event, self.scelta_rect, self.scelta2_rect, self.game_state, self.state_a, self.state_b)
-        return self.game_state
+        self.next_state = choice(event, self.scelta_rect, self.scelta2_rect, self.game_state, self.state_a, self.state_b)
+        return self.next_state
     
     def draw(self, screen, font_text, pink, blue):
         # hover
