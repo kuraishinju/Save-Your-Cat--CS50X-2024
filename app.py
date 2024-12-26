@@ -116,7 +116,7 @@ while True:
             elif game_state == "s1":
                 game_state = s1.path(event)
             elif game_state == "s2":
-                s2 = update_attributes(s2, selected_class)
+                s2 = State2(font_text, pink, cat_name, game_state)
                 game_state = s2.path(event)
             elif game_state == "s3":
                 s3 = State3(font_text, pink, game_state, selected_class)
