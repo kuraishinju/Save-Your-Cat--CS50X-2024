@@ -38,6 +38,7 @@ game_state = "s1"
 
 # * imported classes
 menu = Menu(font_title, font_footer, font_text, pink, blue, selected_class, cat_name, game_state, manager)
+
 # TODO dizionario
 s1 = State1(font_text, pink, cat_name, game_state)
 s2 = State2(font_text, pink, cat_name, game_state)
@@ -76,7 +77,7 @@ while True:
                 cat_name, game_state = menu.cat_naming(event)
                 print(f"Menu: Current game_state: {game_state}")
         
-        # TODO loop       
+        # TODO conditionals      
         elif game_state == "s1":
             if event.type == MOUSEMOTION:
                 s1.choice_hover(event)
@@ -134,7 +135,7 @@ while True:
             if event.type == MOUSEBUTTONDOWN:
                 game_state = s9.path(event)
         
-        # TODO
+        # TODO endings
         elif game_state == "e1":
             if event.type == MOUSEMOTION:
                 e1.hover(event)
@@ -155,7 +156,6 @@ while True:
         menu.draw(screen, fps, font_text, pink, blue)
     
     # TODO loop
-    
     elif game_state == "s1":
         s1.draw(screen, font_text, pink, blue)
     
