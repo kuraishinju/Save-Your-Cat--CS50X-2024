@@ -78,14 +78,10 @@ class Menu:
         # Gestisce la selezione della classe
         mouse_pos = pygame.mouse.get_pos()
         if self.knight_rect.collidepoint(mouse_pos):
-            # print debug statements
-            print("Knight clicked!")
             self.selected_class = "knight"
         elif self.adv_rect.collidepoint(mouse_pos):
-            print("adv clicked!")
             self.selected_class = "adv"
         elif self.wiz_rect.collidepoint(mouse_pos):
-            print("wiz clicked!")
             self.selected_class = "wiz"
         return self.selected_class
     
@@ -94,7 +90,6 @@ class Menu:
         mouse_pos = pygame.mouse.get_pos()
         if self.play_rect.collidepoint(mouse_pos):
             self.cat_name = capwords(self.cat_in.get_text())
-            print(self.cat_name)
             if requirements(self.selected_class, self.cat_name):
                 self.game_state = "s1"
                 return self.cat_name, self.game_state
@@ -157,7 +152,7 @@ class Menu:
 # * Screen 1
 class State1:
     def __init__(self, font_text, pink, cat_name, game_state):
-        self.game_state = game_state
+        self.game_state = "s1"
         self.cat_name = cat_name
         self.mouse = None
 
@@ -201,7 +196,7 @@ class State1:
 # * Screen 2
 class State2:
     def __init__(self, font_text, pink, cat_name, game_state):
-        self.game_state = game_state
+        self.game_state = "s2"
         self.cat_name = cat_name
         self.mouse = None
 
@@ -236,7 +231,7 @@ class State2:
 # * Screen 3
 class State3:
     def __init__(self, font_text, pink, game_state, selected_class):
-        self.game_state = game_state
+        self.game_state = "s3"
         self.selected_class = selected_class
         self.mouse = None
 
@@ -288,7 +283,7 @@ class State3:
 # * Screen 4
 class State4:
     def __init__(self, font_text, pink, cat_name, game_state):
-        self.game_state = game_state
+        self.game_state = "s4"
         self.cat_name = cat_name
         self.mouse = None
 
@@ -332,7 +327,7 @@ class State4:
 # * Screen 5
 class State5:
     def __init__(self, font_text, pink, cat_name, game_state):
-        self.game_state = game_state
+        self.game_state = "s5"
         self.cat_name = cat_name
         self.mouse = None
 
@@ -376,7 +371,7 @@ class State5:
 # * Screen 6
 class State6:
     def __init__(self, font_text, pink, game_state, selected_class):
-        self.game_state = game_state
+        self.game_state = "s6"
         self.selected_class = selected_class
         self.mouse = None
 
@@ -419,7 +414,7 @@ class State6:
 # * Screen 7
 class State7:
     def __init__(self, font_text, pink, game_state):
-        self.game_state = game_state
+        self.game_state = "s7"
         self.mouse = None
 
         self.story_text = (f"WHAT?! You abandon that poor cat?!")
@@ -452,7 +447,7 @@ class State7:
 # * Screen 8
 class State8:
     def __init__(self, font_text, pink, game_state, selected_class, cat_name):
-        self.game_state = game_state
+        self.game_state = "s8"
         self.cat_name = cat_name
         self.selected_class = selected_class
         self.mouse = None
@@ -488,6 +483,10 @@ class State8:
         self.game_state = choice(event, self.scelta_rect, self.scelta2_rect, self.game_state, self.state_a, self.state_b)
         return self.game_state
     
+    def update(self, selected_class, cat_name):
+        self.selected_class = selected_class
+        self.cat_name = cat_name
+    
     def draw(self, screen, font_text, pink, blue):
         # hover
         self.scelta = color_hover(
@@ -505,7 +504,7 @@ class State8:
 # * Screen 9
 class State9:
     def __init__(self, font_text, pink, game_state):
-        self.game_state = game_state
+        self.game_state = "s9"
         self.mouse = None
 
         self.story_text = (f"REALLY?!")
@@ -538,7 +537,7 @@ class State9:
 # * Ending 1
 class Ending1:
     def __init__(self, font_text, font_title, pink, cat_name, game_state, selected_class):
-        self.game_state = game_state
+        self.game_state = "e1"
         self.cat_name = cat_name
         self.selected_class = selected_class
         self.mouse = None
@@ -613,7 +612,7 @@ class Ending1:
 # * Ending 2
 class Ending2:
     def __init__(self, font_text, font_title, pink, cat_name, game_state, selected_class):
-        self.game_state = game_state
+        self.game_state = "e2"
         self.cat_name = cat_name
         self.selected_class = selected_class
         self.mouse = None

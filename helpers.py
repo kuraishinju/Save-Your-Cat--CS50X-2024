@@ -1,6 +1,9 @@
 import pygame
 from pygame.locals import MOUSEBUTTONDOWN, MOUSEMOTION
 
+pink = pygame.Color("deeppink")
+blue = pygame.Color("cyan2")
+
 # * funzione testo lungo
 class TextRectException:
     def __init__(self, message = None):
@@ -110,12 +113,9 @@ def color_hover(font, text, name, black, pink, blue, ms):
 def choice(event, scelta, scelta2, current_state, state_a, state_b):
     mouse_pos = pygame.mouse.get_pos()
     if scelta.collidepoint(mouse_pos):
-        print(f"Prima a: {state_a}")
         return state_a
     elif scelta2.collidepoint(mouse_pos):
-        print(f"Prima b: {state_b}")
         return state_b
-    print(f"Prima none: {current_state}")
     return current_state
 
 # registra scelta SINGOLA
