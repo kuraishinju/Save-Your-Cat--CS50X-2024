@@ -1,6 +1,5 @@
 import pygame
 import pygame_gui
-from pygame.locals import MOUSEBUTTONDOWN, MOUSEMOTION
 from string import capwords
 from helpers import *
 

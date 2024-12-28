@@ -1,8 +1,4 @@
 import pygame
-from pygame.locals import MOUSEBUTTONDOWN, MOUSEMOTION
-
-pink = pygame.Color("deeppink")
-blue = pygame.Color("cyan2")
 
 # * funzione testo lungo
 class TextRectException:
