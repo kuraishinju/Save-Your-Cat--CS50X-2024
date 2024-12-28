@@ -222,12 +222,12 @@ class Ending:
         self.mouse = None
 
         self.title, self.title_rect = simple_text(font_title, self.title_text, pink, (350, 50))
-        self.story, self.story_rect = paragraph(self.story_text, 550, 350, (350, 270), font_text, pink, "Black", 0, 4)
+        self.story, self.story_rect = paragraph(self.story_text, 550, 320, (350, 270), font_text, pink, "Black", 0, 4)
         self.exit_button, self.exit_rect = paragraph(
-            "+---------------+\n|  EXIT GAME  |\n+---------------+", 150, 61, (200, 400), font_text, pink, "Black", 1, 0
+            "+---------------+\n|  EXIT GAME  |\n+---------------+", 130, 61, (200, 400), font_text, pink, "Black", 1, 0
         )
         self.menu_button, self.menu_rect = paragraph(
-            "+-------------------+\n|  BACK TO MENU  |\n+-------------------+", 190, 61, (500, 400), font_text, pink, "Black", 1, 0
+            "+-------------------+\n|  BACK TO MENU  |\n+-------------------+", 160, 61, (500, 400), font_text, pink, "Black", 1, 0
         )
     
     def hover(self, event):
