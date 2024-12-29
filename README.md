@@ -26,4 +26,4 @@ When the player clicks *Play*, the story screens are rendered incorporating the 
 
 This game was developed with the help of **ChatGPT** and **GitHub Copilot**, primarily for tasks such as debugging with print statements (not present in the final version) and splitting the `pygame_gui` UI manager code I wrote into multiple files. AI has also been used to correct any writing mistakes in this `README.md` file and the story since English is not my first language.
 
-The code of this game has also been reviewed by [kici8](https://github.com/kici8) and [Nanaki93XIII](https://github.com/Nanaki93XIII), who helped me identify some bugs and improve code readability and optimization during its development.
+The code of this game has also been reviewed by [kici8](https://github.com/kici8) and [Nanaki93XIII](https://github.com/Nanaki93XIII), who helped me identify some bugs, and improve code readability and optimization during its development.
