@@ -8,6 +8,8 @@ I developed this game after studying programming basics for two and a half month
 The idea of developing this game comes from my love for cats and my desire of challenging myself by learning Python through a project that required skills and knowledge beyond what I acquired during the course.
 
 ### The Game:
+To run the game it's necessary to have python, pygame and pygame_gui installed. Run the game by simply running the python file (clicking on the play button on top right) in `app.py`.
+
 At the start of the game, the player encounters a menu screen where they must make two inputs:  
 1. A selection between *three choices* (inspired by D&D classes).  
 2. A name for the cat (a string with a maximum of 10 characters).  
