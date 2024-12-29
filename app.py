@@ -6,7 +6,7 @@ from game import update
 from layouts import Menu
 
 # gioco
-pygame.display.set_caption("•ﻌ• Save the cat •ﻌ•")
+pygame.display.set_caption("•ﻌ• Save Your Cat •ﻌ•")
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 500
 screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
