@@ -1,4 +1,4 @@
-# Final project for CS50X 2024
+# Save Your Cat - final project for CS50X 2024
 ### Video Demo:  <URL HERE>
 ### Description:
 **Save the Cat** is a *choose your own adventure*-style game developed in Python using the Pygame library. The player assumes the role of a character in a fantasy world inhabited by talking animals. Their mission is to rescue their beloved cat, who has been kidnapped and taken to the Land of Retrievers, a realm ruled by dogs. The story is relatively short and features two possible endings.
