@@ -14,46 +14,46 @@ def update(selected_class, cat_name, games, ends):
     # liste stati
     state1 = [
         "s1",
-        f"You come back home from a long work day at the king's castle when... you don't hear {cat_name} meowing, complaining that you didn't give them their favorite food but some chicken (how many times do they have to tell you that they love salmon but absolutely despise chicken?!) You are in shock, {cat_name} definetly has been kidnapped by the enemy kingdom: the Land of Retrievers! What do you do?",
-        "1. You look for some clues",
+        f"You come home after a long day working at the king's castle, but something feels off... You don't hear {cat_name} meowing, complaining about how you dared to give them chicken instead of their favorite salmon. (How many times do they have to tell you they *love* salmon but absolutely *hate* chicken?!) Shocked, you realize {cat_name} must have been kidnapped by the enemy kingdom: the Land of Retrievers! What do you do?",
+        "1. Look for some clues",
         "s2",
-        "2. You pack up for the journey and leave at once",
+        "2. Pack up for the journey and leave immediately",
         "s3"
     ]
     state2 = [
         "s2",
-        f"There are no clues apart from {cat_name}'s bowl being untouched and still full of chicken. Your remorse haunts you, you'd better hurry!",
-        "1. You pack up for the journey and leave",
+        f"There are no clues, except for {cat_name}'s bowl, untouched and still full of chicken. Guilt gnaws at you. You'd better hurry!",
+        "1. Pack up for the journey and leave",
         "s3"
     ]
     state3 = [
         "s3",
-        f"Haste is the best choice! You pick up your {cl[0]} and venture to the enemy kingdom. Along the way your neighbour stops you and tells you: <They left not a long time ago and went into the forest, if you're quick enough you might be able to catch up!> You run into the woods, but you have no idea where you are supposed to go from there.",
-        "1. East, towards the nearest inn",
+        f"Haste is the best choice! You grab your {cl[0]} and head toward the enemy kingdom. Along the way, your neighbor stops you and says, <They left not long ago and went into the forest. If you're quick, you might catch up!> You run into the woods, but you have no idea where to go from there.",
+        "1. Head east, toward the nearest inn",
         "s4",
-        "2. North west, straight towards the enemy kingdom",
+        "2. Go northwest, straight toward the enemy kingdom",
         "s5"
     ]
     state4 = [
         "s4",
-        f"Since night is approaching, you choose to check if the kidnappers stopped by the only inn in the area to rest and have supper. You walk into the building and are met with the delicious smell of salmon soup... wait... you forgot to bring with you the salmon for {cat_name}! How could you?! But you have no time to spare and need to catch up with the kidnappers (who are not there).",
-        "1. Screw it, I need to retrieve some salmon!",
+        f"Since night is approaching, you choose to check if the kidnappers stopped by the only inn in the area to rest and have supper. You walk into the building and are met with the delicious aroma of salmon soup... wait... you forgot to bring with you the salmon for {cat_name}! How could you?! But there's no time to dwell on it, the kidnappers aren't here.",
+        "1. Forget it, I need to get some salmon!",
         "e1",
-        "2. You ask the inn keeper if someone passed by",
+        "2. Ask the innkeeper if anyone suspicious passed by",
         "s6"
     ]
     state5 = [
         "s5",
-        f"You have no time to spare, you rush towards the Land of Retrievers and run through the woods all night, determined to save {cat_name}. No wild animals dare to approach you out of fear. As morning comes you walk through the gates of the kingdom and find yourself surroundedby people and... dogs. What a nightmare! (... You liar, you love dogs, you just never had the courage to tell {cat_name}). You catch a glimpse of a sketchy man with a cage with a cat inside, but no sight of {cat_name}.",
-        f"1. You have no time to waste, look for {cat_name}",
+        f"There's no time to waste. You dash toward the Land of Retrievers, running through the woods all night with determination. Wild animals keep their distance, intimidated by your resolve. As dawn breaks, you reach the kingdom's gates, surrounded by people and... dogs. What a nightmare! (...Okay, maybe you secretly love dogs but never had the courage to tell {cat_name}.) You catch a glimpse of a suspicious man with a cage containing a cat, but it's not {cat_name}.",
+        f"1. Keep looking for {cat_name}",
         "s7",
         "2. Save that cat!",
         "s8"
     ]
     state6 = [
         "s6",
-        f"The inn keeper, intimidated by your {cl[1]}, stutters and tells you that someone stopped by less than half an hour ago and was carrying with them a cat in a cage. Furious with rage you ask them the direction and go...",
-        "1. North west, straight towards the enemy kingdom",
+        f"The innkeeper, intimidated by your {cl[1]}, stammers and reveals that someone with a cat in a cage passed by less than half an hour ago. Enraged, you demand the direction and hurry off",
+        "1. Head northwest, straight to the enemy kingdom",
         "s5"
     ]
     state7 = [
@@ -64,10 +64,10 @@ def update(selected_class, cat_name, games, ends):
     ]
     state8 = [
         "s8",
-        f"You approach the sketchy man who, intimidated by your {cl[2]} drops the cage and runs in fear. Nobody seems to care about you and that man. You hear a voice from the cage telling you: <Thank you my saviour! Oh, I recognize you! You are {cat_name}'s servant! The one who forgot about the salmon! You must be so worried about them... Bring me back to your house and I will tell you where {cat_name} is!>",
-        "1. Well... all right, let's go back.",
+        f"You confront the sketchy man, who drops the cage and flees terrified by your {cl[2]}. Nobody seems to care about the commotion. You hear a voice from the cage: <Thank you, my savior! Oh, I recognize you! You're {cat_name}'s servant, the one who forgot the salmon! You must be worried... Take me to your house, and I'll tell you where {cat_name} is!>>",
+        "1. Well... all right, let's head back.",
         "e2",
-        f"2. No way, you leave and go look for {cat_name}",
+        f"2. No way, you leave and keep looking for {cat_name}",
         "s9"
     ]
     state9 = [
@@ -79,14 +79,14 @@ def update(selected_class, cat_name, games, ends):
     ending1 = [
         "e1",
         "You got the Salmon Ending!",
-        f"You approach the inn keeper and kindly ask them for some salmon, explaining your misadventure. She starts laughing at you and you are enraged: <How dare you!> But she quickly tells you that {cat_name}, actually, is in the kitchen eating salmon by themselves because you were so distracted by work that you dared to forget what their favorite food was! You reunite with {cat_name} (after they meow at you all of their complaints) and go straight back home. I hope that from now on you will never forget to give them salmon again!",
+        f"You kindly ask the innkeeper for some salmon, explaining your plight. She bursts into laughter and you are furious: <How dare you?!> She quickly explains that {cat_name} is actually in the kitchen, happily eating salmon because you forgot their favorite food in your work-induced haze. You reunite with {cat_name} (after a thorough scolding) and head home. Hopefully, you'll never forget their love for salmon again!",
         cat_name,
         selected_class
     ]
     ending2 = [
         "e2",
         "You got the Fluffy Ending!",
-        f"It takes you a few hours, but eventually you get home in the evening. The cat (whose name is Miss Fluffy, at least that's what she said) looks at you satisfied and tells you: <Well... {cat_name} is actually happily eating salmon at the inn in the woods. They run away from home because you gave them chicken. Maybe next time be more mindful! They will be back soon, don't worry.> A few hours pass and {cat_name} is back home complaining about your ineptitude as a servant, while Pizza already went back home to her's (equally incompetent).",
+        f"Hours later, you arrive home. The cat in the cage (who introduces herself as Miss Fluffy) looks smug and says, <Well... {cat_name} is actually happily eating salmon at the inn in the woods. They ran away because you gave them chicken. Next time, be more thoughtful! They'll return soon.> Sure enough, a few hours later, {cat_name} returns, grumbling about your ineptitude as a servant. Meanwhile, Miss Fluffy heads home to her equally 'incompetent' owner.",
         cat_name,
         selected_class
     ]
