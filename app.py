@@ -57,7 +57,6 @@ while True:
                     update(selected_class, cat_name, game_states, endings)
 
             elif game_state in game_states:
-                game_states[game_state].update(event, selected_class, cat_name)
                 game_state = game_states[game_state].path(event)
 
             elif game_state in endings:
